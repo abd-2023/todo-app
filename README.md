@@ -1,0 +1,1 @@
+This is a simple TODO APP made using React Project based on the challenge of Front end Mentor https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW

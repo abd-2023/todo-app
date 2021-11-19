@@ -1,0 +1,253 @@
+* {
+    box-sizing: border-box;
+}
+$todo-check-grad: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+.light {
+    --header-bg-img-mobile: url("images/bg-mobile-light.jpg") no-repeat;
+    --header-bg-img-desktop: url("images/bg-desktop-light.jpg") no-repeat;
+    --light-grayish-blue: hsl(233, 11%, 84%);
+    --grayish-blue: hsl(236, 9%, 61%);
+    --todo-comp: hsl(236, 33%, 92%);
+    --create-todo-bg: #fff;
+    --todos-bg: #fff;
+}
+.dark {
+    --header-bg-img-mobile: url("images/bg-mobile-dark.jpg") no-repeat;
+    --header-bg-img-desktop: url("images/bg-desktop-dark.jpg") no-repeat;
+    --todos-bg: hsl(232, 24%, 19%);
+    --todo-txt: hsl(235deg, 17%, 70%);
+    --todo-comp: hsl(235, 11%, 43%);
+    --light-grayish-blue: rgb(165, 168, 192);
+    --create-todo-bg: var(--todos-bg);
+    --filter-bg: var(--todos-bg);
+    --grayish-blue: hsl(243deg 11% 37%);
+    background: hsl(235, 21%, 10%);
+}
+.dark .moon-icon,
+.light .sun-icon {
+    display: none;
+}
+label[for="theme-toggle"]:hover {
+    cursor: pointer;
+}
+#theme-toggle {
+    display: none;
+}
+
+$fontFamily: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+
+@mixin btn-styles {
+    border: none;
+    background: none;
+    font-family: $fontFamily;
+    color: var(--grayish-blue);
+}
+
+.App {
+    text-align: center;
+    margin: 0 auto;
+    min-height: 100vh;
+    &-header {
+        background: var(--header-bg-img-mobile);
+        background-size: contain !important;
+        min-height: calc((100vw / 15) * 8);
+        font-size: calc(10px + 2vmin);
+        color: white;
+        padding: 2rem 5.56%;
+        .top-bar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 0 auto;
+            position: relative;
+            top: clamp(0px, calc((100vw / 15) * 8 - 180px), 100vh);
+        }
+    }
+}
+$header-height: unquote("min(calc(((100vw / 24) * 5) - 200px))");
+@media screen and (min-width: 768px) {
+    .light .App-header {
+        background: var(--header-bg-img-desktop);
+        min-height: calc((100vw / 24) * 5);
+    }
+    .dark .App-header {
+        background: var(--header-bg-img-desktop);
+        min-height: calc((100vw / 24) * 5);
+    }
+    .App-header .top-bar {
+        position: relative;
+        max-width: 540px;
+        top: clamp(0px, calc((100vw / 24) * 5 - 200px), 100vh);
+    }
+}
+main {
+    width: 90%;
+    margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+    main {
+        max-width: 540px;
+    }
+}
+.site-title {
+    margin: 0;
+    line-height: 1em;
+    letter-spacing: 0.5em;
+    font-size: 2rem;
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+}
+.create-todo {
+    display: flex;
+    margin-top: -6rem;
+    margin-bottom: 1rem;
+    background: var(--create-todo-bg);
+    border-radius: 5px;
+    padding: 1rem;
+    &-inp {
+        margin-left: 1rem;
+        border: none;
+        width: 90%;
+        background: var(--create-todo-bg);
+        color: var(--todo-txt);
+        font-family: $fontFamily;
+        &::placeholder,
+        &::-webkit-input-placeholder {
+            font-family: $fontFamily;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.todos {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
+    background: var(--todos-bg);
+}
+.todo {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    &:hover {
+        cursor: pointer;
+        // cursor: move;
+    }
+    &:active {
+        cursor: move;
+    }
+    &-text {
+        margin: 0;
+        padding: 1rem;
+        padding-left: 0.5rem;
+        flex-grow: 1;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        color: var(--todo-txt);
+    }
+    &-cross {
+        margin-left: auto;
+    }
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--light-grayish-blue);
+    }
+    &-text::before {
+        content: " ";
+        display: inline-block;
+        border: 1px solid var(--light-grayish-blue);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    &:hover &-text::before {
+        border-top: 1px solid hsl(192, 100%, 67%);
+        border-left: 1px solid hsl(192, 100%, 67%);
+        border-bottom: 1px solid hsl(280, 87%, 65%);
+        border-right: 1px solid hsl(280, 87%, 65%);
+    }
+}
+
+.create-todo::before {
+    content: " ";
+    border: 1px solid var(--light-grayish-blue);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.no-task .todo-text {
+    justify-content: center;
+    &::before {
+        display: none;
+    }
+}
+.todo-completed {
+    .todo-text {
+        text-decoration: line-through;
+        color: var(--todo-comp);
+        // hsl(236, 33%, 92%)
+        &::before {
+            content: url("images/icon-check.svg");
+            background: $todo-check-grad;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.todo-summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    color: var(--grayish-blue);
+    p {
+        margin: 0;
+    }
+    button {
+        @include btn-styles;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.filter {
+    margin: 1.25rem 0;
+    padding: 1rem 0;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background: var(--filter-bg);
+    button {
+        @include btn-styles;
+        font-weight: 700;
+    }
+}
+input[name="filterItem"] {
+    // padding: 0 20px;
+    display: none;
+    & + label {
+        padding: 0 10px;
+        font-weight: 700;
+        color: hsl(236, 9%, 61%);
+    }
+    & + label:hover {
+        cursor: pointer;
+    }
+    &:checked + label {
+        color: hsl(220, 98%, 61%);
+    }
+}
+.drop-area {
+    min-height: 20px;
+    background-color: hsl(236, 9%, 61%);
+}
+footer {
+    padding: 3rem 0 5rem;
+    color: var(--grayish-blue);
+}
