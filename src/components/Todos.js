@@ -39,15 +39,6 @@ const Todos = ({ newTask, filter }) => {
     const [todo, setTodo] = useState(todoList);
     var pendingTodos = 0;
 
-    var renderedTodo = (
-        <Todo
-            todo={todo}
-            key={todo.id}
-            toggleTodo={toggleTodo}
-            removeTask={removeTask}
-        />
-    );
-
     function renderTodos() {
         console.log("switch function working");
         switch (filter) {
@@ -98,20 +89,6 @@ const Todos = ({ newTask, filter }) => {
                     </div>
                 );
             case "completedFilter":
-                // return todo.map((todo) => {
-                //     if (todo.status === "completed") {
-                //         // console.log("if completed working");
-                //         return (
-                //             <Todo
-                //                 todo={todo}
-                //                 key={todo.id}
-                //                 toggleTodo={toggleTodo}
-                //                 removeTask={removeTask}
-                //             />
-                //         );
-                //     }
-                // });
-                // console.log("completed filter switch working");
                 var completedTodos = todo.reduce((finalTodos, todo) => {
                     if (todo.status === "completed") {
                         // console.log("if completed working");
@@ -147,7 +124,7 @@ const Todos = ({ newTask, filter }) => {
         // console.log(taskId, todo, newTodo);
         setTodo([...newTodo]);
     }
-    // aaaaa
+    
     useEffect(() => {
         if (newTask) {
             console.log("newTask", newTask);

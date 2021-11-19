@@ -1,6 +1,5 @@
 import moon from "../images/icon-moon.svg";
 import sun from "../images/icon-sun.svg";
-import { useEffect, useRef } from "react";
 
 const Header = ({ toggleTheme }) => {
     return (

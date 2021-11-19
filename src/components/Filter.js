@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const Filter = ({toggleRadio}) => {
     // const [checked, setChecked] = useState(true)
 

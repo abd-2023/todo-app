@@ -3,7 +3,7 @@ import cross from "../images/icon-cross.svg";
 
 const Todo = ({ todo: { status, task, id }, toggleTodo, removeTask }) => {
     var singleTodo;
-    const todoEle = useRef(null)
+    const todoEle = useRef(null);
     // console.log("----task in todo---", task, typeof task);
 
     function drop(e) {
@@ -23,45 +23,28 @@ const Todo = ({ todo: { status, task, id }, toggleTodo, removeTask }) => {
         e.dataTransfer.setData("text/html", e.target.outerHTML);
         console.log(e.dataTransfer.getData("text/html"));
     }
-    // function drop(e) {
-    //     console.log("element dropped", e);
-    //     var eleId = e.dataTransfer.getData("text/plain");
-    //     console.log(eleId);
-    //     e.target.appendChild(document.getElementById(eleId));
-    // }
     singleTodo = (
-        <>
-            {/* <div
-                className="drop-area"
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={drop}
-            > */}
-            <div
-                className={
-                    status === "completed" ? "todo todo-completed" : "todo"
-                }
-                draggable="true"
-                id={id}
-                onDragStart={drag}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={drop}
-                ref={todoEle}
-                // onDragOver="return false"
-            >
-                <p className="todo-text" onClick={() => toggleTodo(id)}>
-                    {task}
-                </p>
-                <img
-                    src={cross}
-                    alt="delete todo"
-                    className="todo-cross"
-                    onClick={() => {
-                        removeTask(id);
-                    }}
-                />
-            </div>
-            {/* </div> */}
-        </>
+        <div
+            className={status === "completed" ? "todo todo-completed" : "todo"}
+            draggable="true"
+            id={id}
+            onDragStart={drag}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={drop}
+            ref={todoEle}
+        >
+            <p className="todo-text" onClick={() => toggleTodo(id)}>
+                {task}
+            </p>
+            <img
+                src={cross}
+                alt="delete todo"
+                className="todo-cross"
+                onClick={() => {
+                    removeTask(id);
+                }}
+            />
+        </div>
     );
     return singleTodo;
 };
