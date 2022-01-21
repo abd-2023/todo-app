@@ -10,7 +10,6 @@ const Todo = ({ todo: { status, task, id }, toggleTodo, removeTask }) => {
         console.log("element dropped", e);
         var eleId = e.dataTransfer.getData("text/plain");
         console.log(eleId, "drop target", e.target);
-        // todosEle.current.insertAdjacentElement("afterend", document.getElementById(eleId));
         todoEle.current.insertAdjacentElement(
             "afterend",
             document.getElementById(eleId)

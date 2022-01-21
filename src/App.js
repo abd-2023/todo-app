@@ -76,10 +76,7 @@ function App() {
         console.log("change theme in local storage ");
         window.localStorage.setItem("theme", theme);
     }, [theme]);
-    // var a = 6;
-    // if(a == 5){
-    //     console.log("abd");
-    // }
+
     function setSystemTheme(e) {
         if (e.matches) {
             console.log("e.matches true", e);
